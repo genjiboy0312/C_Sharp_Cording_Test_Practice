@@ -5,9 +5,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Programmers\Lv. 2 Clear %28New%29\" />
-    <Folder Include="Programmers\Lv. 2 Retry %28New%29\" />
-  </ItemGroup>
-
 </Project>

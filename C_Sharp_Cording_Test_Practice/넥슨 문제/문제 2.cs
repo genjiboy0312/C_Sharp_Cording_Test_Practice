@@ -34,46 +34,131 @@
 //{
 //    class Result
 //    {
-
 //        public static List<int> nodeDistance(int sNodes, List<int> sFrom, List<int> sTo)
 //        {
-//            List<int> _node = new List<int>();
+//            // 1. 그래프를 인접 리스트로 변환
+//            List<int>[] _graph = new List<int>[sNodes];
+//            for (int i = 0; i < sNodes; i++)
+//                _graph[i] = new List<int>();
+
+
+//            //  연결
+//            for (int i = 0; i < sFrom.Count; i++)
+//            {
+//                int u = sFrom[i];
+//                int v = sTo[i];
+//                _graph[u].Add(v);
+//                _graph[v].Add(u);
+//            }
+
+//            // 2. 사이클 찾기 (DFS)
+//            bool[] _visited = new bool[sNodes];
+//            int[] _parent = new int[sNodes];
+//            Array.Fill(_parent, -1);
+//            bool[] _isCycle = new bool[sNodes];
+
+//            void DFS(int node, int par)
+//            {
+//                _visited[node] = true;
+//                foreach (var next in _graph[node])
+//                {
+//                    if (next == par) continue;
+//                    if (!_visited[next])
+//                    {
+//                        _parent[next] = node;
+//                        DFS(next, node);
+//                    }
+//                    else
+//                    {
+//                        // 사이클 발견
+//                        int cur = node;
+//                        _isCycle[cur] = true;
+//                        while (cur != next)
+//                        {
+//                            cur = _parent[cur];
+//                            _isCycle[cur] = true;
+//                        }
+//                    }
+//                }
+//            }
+
+//            DFS(0, -1);
+
+//            // 3. BFS로 순환으로부터 거리 계산
+//            int[] _dist = Enumerable.Repeat(-1, sNodes).ToArray();
+//            Queue<int> _queue = new Queue<int>();
 //            for (int i = 0; i < sNodes; i++)
 //            {
-
+//                if (_isCycle[i])
+//                {
+//                    _dist[i] = 0;
+//                    _queue.Enqueue(i);
+//                }
 //            }
-//            return _node.ToArray();
+
+//            while (_queue.Count > 0)
+//            {
+//                int node = _queue.Dequeue();
+//                foreach (var next in _graph[node])
+//                {
+//                    if (_dist[next] == -1)
+//                    {
+//                        _dist[next] = _dist[node] + 1;
+//                        _queue.Enqueue(next);
+//                    }
+//                }
+//            }
+
+//            return _dist.ToList();
 //        }
 
 //    }
 //    class 문제_2
 //    {
+//        //public static void Main(string[] args)
+//        //{
+//        //    TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+//        //    string[] sNodesEdges = Console.ReadLine().TrimEnd().Split(' ');
+
+//        //    int sNodes = Convert.ToInt32(sNodesEdges[0]);
+//        //    int sEdges = Convert.ToInt32(sNodesEdges[1]);
+
+//        //    List<int> sFrom = new List<int>();
+//        //    List<int> sTo = new List<int>();
+
+//        //    for (int i = 0; i < sEdges; i++)
+//        //    {
+//        //        string[] sFromTo = Console.ReadLine().TrimEnd().Split(' ');
+
+//        //        sFrom.Add(Convert.ToInt32(sFromTo[0]));
+//        //        sTo.Add(Convert.ToInt32(sFromTo[1]));
+//        //    }
+
+//        //    List<int> result = Result.nodeDistance(sNodes, sFrom, sTo);
+
+//        //    textWriter.WriteLine(String.Join("\n", result));
+
+//        //    textWriter.Flush();
+//        //    textWriter.Close();
+//        //}
 //        public static void Main(string[] args)
 //        {
-//            TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+//            // 예제 입력값 바로 지정
+//            int sNodes = 6;
+//            List<int> sFrom = new List<int> { 0, 1, 0, 2, 0, 1 };
+//            List<int> sTo = new List<int> { 1, 2, 2, 4, 3, 5 };
 
-//            string[] sNodesEdges = Console.ReadLine().TrimEnd().Split(' ');
-
-//            int sNodes = Convert.ToInt32(sNodesEdges[0]);
-//            int sEdges = Convert.ToInt32(sNodesEdges[1]);
-
-//            List<int> sFrom = new List<int>();
-//            List<int> sTo = new List<int>();
-
-//            for (int i = 0; i < sEdges; i++)
-//            {
-//                string[] sFromTo = Console.ReadLine().TrimEnd().Split(' ');
-
-//                sFrom.Add(Convert.ToInt32(sFromTo[0]));
-//                sTo.Add(Convert.ToInt32(sFromTo[1]));
-//            }
-
+//            // 노드 거리 계산
 //            List<int> result = Result.nodeDistance(sNodes, sFrom, sTo);
 
-//            textWriter.WriteLine(String.Join("\n", result));
-
-//            textWriter.Flush();
-//            textWriter.Close();
+//            // 결과 출력
+//            Console.WriteLine("각 노드의 순환까지 거리:");
+//            for (int i = 0; i < result.Count; i++)
+//            {
+//                Console.WriteLine($"노드 {i}: {result[i]}");
+//            }
 //        }
+
 //    }
 //}

@@ -28,13 +28,13 @@
 // * 위 배열들 중에서 4와 1을 바꾼 a 배열이 1번의 이동으로 최소한의 이동을 만족한다
 // * 
 // * Function Description
-// * 아래 편집기에서 Function Moves()르 완료한다
+// * 아래 편집기에서 Function Moves()를 완료한다
 // * 
 // * Moves()에는 다음과 같은 매개 변수가 있다.
 // * int arr[n] : 양의 정수 배열
 // * 
 // * Returns
-// * int : 모든 짝수 요소가 홀수 요소보다 이전 인덱스에 있는 정수 뱅려을 정렬하는 데 필요한
+// * int : 모든 짝수 요소가 홀수 요소보다 이전 인덱스에 있는 정수 배열을 정렬하는 데 필요한
 // * 최소 이동 횟수
 // * 
 // * Note : 짝수 또는 홀수 내의 순서는 중요하지 않다.
@@ -42,7 +42,6 @@
 
 //namespace C_Sharp_Cording_Test_Practice
 //{
-//    /*
 //    class Result
 //    {
 
@@ -54,47 +53,63 @@
 //         */
 //        public static int Moves(List<int> arr)
 //        {
-//            int _pos = 0; // 이동 횟수
-//            int _idx = 0; // 짝수를 넣을 인덱스 위치
+//            int _moveCount = 0;   // 총 이동 횟수
+//            int _evenPos = 0;     // 다음 짝수가 와야 할 인덱스 위치
 
 //            for (int i = 0; i < arr.Count; i++)
 //            {
-//                if (arr[i] % 2 == 0) 
+//                if (arr[i] % 2 == 0)
 //                {
-//                    if (i != _idx) 
+//                    if (i != _evenPos)
 //                    {
-//                        _pos++;
+//                        _moveCount++;
 //                    }
-//                    _idx++; 
+//                    _evenPos++;
 //                }
 //            }
-//            return _pos;
+//            return _moveCount;
 //        }
 
 //    }
 //    class 문제_1
 //    {
+//        //public static void Main(string[] args)
+//        //{
+//        //    TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+//        //    int arrCount = Convert.ToInt32(Console.ReadLine().Trim());
+
+//        //    List<int> arr = new List<int>();
+
+//        //    for (int i = 0; i < arrCount; i++)
+//        //    {
+//        //        int arrItem = Convert.ToInt32(Console.ReadLine().Trim());
+//        //        arr.Add(arrItem);
+//        //    }
+
+//        //    int result = Result.Moves(arr);
+
+//        //    textWriter.WriteLine(result);
+
+//        //    textWriter.Flush();
+//        //    textWriter.Close();
+//        //}
 //        public static void Main(string[] args)
 //        {
-//            TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+//            List<List<int>> _testCases = new List<List<int>>
+//    {
+//        new List<int> { 8, 1, 4, 7 },      // 기대값: 1
+//        new List<int> { 2, 4, 6, 8 },      // 기대값: 0
+//        new List<int> { 1, 3, 5, 7 },      // 기대값: 0
+//        new List<int> { 4, 3, 2, 1, 6, 5 } // 기대값: 2
+//    };
 
-//            int arrCount = Convert.ToInt32(Console.ReadLine().Trim());
-
-//            List<int> arr = new List<int>();
-
-//            for (int i = 0; i < arrCount; i++)
+//            foreach (var _arr in _testCases)
 //            {
-//                int arrItem = Convert.ToInt32(Console.ReadLine().Trim());
-//                arr.Add(arrItem);
+//                int _result = Result.Moves(_arr);
+//                Console.WriteLine($"입력: [{string.Join(", ", _arr)}] → 이동 횟수: {_result}");
 //            }
-
-//            int result = Result.Moves(arr);
-
-//            textWriter.WriteLine(result);
-
-//            textWriter.Flush();
-//            textWriter.Close();
 //        }
+
 //    }
-//*/
 //}
