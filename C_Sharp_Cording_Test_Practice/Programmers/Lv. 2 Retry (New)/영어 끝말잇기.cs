@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /* Retry
  * 1부터 n까지 번호가 붙어있는 n명의 사람이 영어 끝말잇기를 하고 있습니다. 영어 끝말잇기는 다음과 같은 규칙으로 진행됩니다.
@@ -30,26 +27,36 @@ using System.Threading.Tasks;
  */
 namespace C_Sharp_Cording_Test_Practice
 {
+    /*
     class Solution
     {
         public int[] solution(int n, string[] words)
         {
-            int[] answer = { words.Length };
+            HashSet<string> used = new HashSet<string>();
+            used.Add(words[0]);  // 첫 단어 등록
 
-
-            for (int i = 0; i < words.Length; i++)
+            for (int i = 1; i < words.Length; i++)
             {
-                string _firstWord = words[i];
-                string _lastWord = words[i - 1];
+                string prev = words[i - 1];
+                string current = words[i];
 
-                // 첫 글자와 이전 단어의 마지막 글자 비교
-                if (_firstWord[0] != _lastWord[_lastWord.Length - 1])
+                // 규칙 위반 3가지 확인
+                bool lastMismatch = prev[prev.Length - 1] != current[0];
+                bool alreadyUsed = used.Contains(current);
+                bool tooShort = current.Length == 1;
+
+                if (lastMismatch || alreadyUsed || tooShort)
                 {
-                    // 규칙 위반
+                    int player = (i % n) + 1;    // 탈락한 사람 번호
+                    int turn = (i / n) + 1;      // 몇 번째 차례
+                    return new int[] { player, turn };
                 }
+
+                used.Add(current);
             }
 
-            return answer;
+            // 탈락자가 없는 경우
+            return new int[] { 0, 0 };
         }
     }
     internal class 영어_끝말잇기
@@ -62,9 +69,14 @@ namespace C_Sharp_Cording_Test_Practice
             string[] _words02 = { "hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive" };
             string[] _words03 = { "hello", "one", "even", "never", "now", "world", "draw" };
 
-            Console.WriteLine(_solution.solution(3, _words01));         //  3, 3
-            Console.WriteLine(_solution.solution(5, _words02));         //  0, 0
-            Console.WriteLine(_solution.solution(2, _words03));         //  1, 3
+            int[] r1 = _solution.solution(3, _words01);
+            int[] r2 = _solution.solution(5, _words02);
+            int[] r3 = _solution.solution(2, _words03);
+
+            Console.WriteLine($"[{r1[0]}, {r1[1]}]"); // [3, 3]
+            Console.WriteLine($"[{r2[0]}, {r2[1]}]"); // [0, 0]
+            Console.WriteLine($"[{r3[0]}, {r3[1]}]"); // [1, 3]
         }
     }
+    */
 }
