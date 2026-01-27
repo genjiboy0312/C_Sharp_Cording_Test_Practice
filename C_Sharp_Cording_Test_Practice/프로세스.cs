@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-/* 운영체제의 역할 중 하나는 컴퓨터 시스템의 자원을 효율적으로 관리하는 것입니다. 
+/* Retry
+ * 운영체제의 역할 중 하나는 컴퓨터 시스템의 자원을 효율적으로 관리하는 것입니다. 
  * 이 문제에서는 운영체제가 다음 규칙에 따라 프로세스를 관리할 경우 특정 프로세스가 몇 번째로 실행되는지 알아내면 됩니다.
  * 
  * 1. 실행 대기 큐(Queue)에서 대기중인 프로세스 하나를 꺼냅니다.
@@ -19,17 +18,38 @@ using System.Threading.Tasks;
  */
 namespace C_Sharp_Cording_Test_Practice
 {
+    /*
     public class Solution
     {
         public int solution(int[] priorities, int location)
         {
             int answer = 0;
 
-            // (우선순위, 원래 위치) 큐 생성
-            Queue<(int priority, int index)> queue = new Queue<(int, int)>();
+            // (우선순위, 원래 위치) 큐 생성 → 튜플
+            Queue<(int _priority, int _index)> _queue = new Queue<(int, int)>();
+            //  전체 삽입
             for (int i = 0; i < priorities.Length; i++)
             {
-                queue.Enqueue((priorities[i], i));
+                _queue.Enqueue((priorities[i], i));
+            }
+
+            //  비어있는지 확인
+            while (_queue.Count > 0)
+            {
+                //  하나 꺼낸다
+                var _cur = _queue.Dequeue();
+                //  뒤에 더 큰 priority 있는지 검사. Any : 확인
+                bool _hasHigher = _queue.Any(x => x._priority > _cur._priority);
+
+                //  있으면 다시 넣고, 없으면 실행 카운트 + location 검사
+                if (_hasHigher)
+                    _queue.Enqueue(_cur);       //  뒤로 보냄
+                else
+                {
+                    answer++;
+                    if (_cur._index == location)
+                        return answer;
+                }
             }
             return answer;
         }
@@ -41,10 +61,11 @@ namespace C_Sharp_Cording_Test_Practice
             Solution _solution = new Solution();
 
             int[] _prior01 = { 2, 1, 3, 2 };
-            int[] _prior02 = { 1, 1, 9, 1, 1 };
+            int[] _prior02 = { 1, 1, 9, 1, 1, 1 };
 
             Console.WriteLine(_solution.solution(_prior01, 2));     //  1
             Console.WriteLine(_solution.solution(_prior02, 0));     //  5
         }
     }
+    */
 }
