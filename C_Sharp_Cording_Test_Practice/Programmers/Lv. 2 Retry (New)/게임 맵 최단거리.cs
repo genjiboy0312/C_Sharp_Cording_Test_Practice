@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /* ROR 게임은 두 팀으로 나누어서 진행하며, 상대 팀 진영을 먼저 파괴하면 이기는 게임입니다. 따라서, 각 팀은 상대 팀 진영에 최대한 빨리 도착하는 것이 유리합니다.
  * 
@@ -28,30 +24,66 @@ using System.Threading.Tasks;
  */
 namespace C_Sharp_Cording_Test_Practice
 {
+    /*
     class Solution
     {
         public int solution(int[,] maps)
         {
-            int answer = 0;
+            // 맵 크기
+            int _rowCount = maps.GetLength(0);
+            int _colCount = maps.GetLength(1);
 
-            int _row = 0, _col = 0;
-            Queue<(int _row, int _col)> _queue = new Queue<(int _row, int _col)>();
-            bool[,] _visited = new bool[_row, _col];
+            // 방문 여부
+            bool[,] _visited = new bool[_rowCount, _colCount];
 
+            // 최단 거리 저장
+            int[,] _distance = new int[_rowCount, _colCount];
+
+            // BFS용 큐 (좌표)
+            Queue<(int row, int col)> _queue = new Queue<(int, int)>();
+
+            // 이동 방향 (상, 하, 좌, 우)
+            int[] _dirRow = { -1, 1, 0, 0 };
+            int[] _dirCol = { 0, 0, -1, 1 };
+
+            // 시작점
             _queue.Enqueue((0, 0));
             _visited[0, 0] = true;
+            _distance[0, 0] = 1;
 
             while (_queue.Count > 0)
             {
-                (int row, int col) _now = _queue.Dequeue();
+                var _cur = _queue.Dequeue();        //  1. 현재 위치를 꺼낸다
 
-                for (int now = 0; now < 5; now++)
+                // 도착 지점이면 바로 반환
+                if (_cur.row == _rowCount - 1 && _cur.col == _colCount - 1)
+                    return _distance[_cur.row, _cur.col];
+
+                // 2. 4방향 탐색
+                for (int i = 0; i < 4; i++)
                 {
+                    int _nextRow = _cur.row + _dirRow[i];
+                    int _nextCol = _cur.col + _dirCol[i];
 
+                    // 맵 밖
+                    if (_nextRow < 0 || _nextRow >= _rowCount || _nextCol < 0 || _nextCol >= _colCount)
+                        continue;
 
+                    // 벽
+                    if (maps[_nextRow, _nextCol] == 0)
+                        continue;
+
+                    // 이미 방문
+                    if (_visited[_nextRow, _nextCol])
+                        continue;
+
+                    _visited[_nextRow, _nextCol] = true;
+                    _distance[_nextRow, _nextCol] = _distance[_cur.row, _cur.col] + 1;        //  3. 거리 = 이전거리 + 1
+                    _queue.Enqueue((_nextRow, _nextCol));                                   //  4. 갈 수 있으면 큐에 넣는다
                 }
             }
-            return answer;
+            // 도착 불가
+            return -1;
         }
 
         internal class 게임_맵_최단거리
@@ -68,5 +100,5 @@ namespace C_Sharp_Cording_Test_Practice
             }
         }
     }
+    */
 }
-
